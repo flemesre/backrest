@@ -36,11 +36,6 @@ export class Config extends Message<Config> {
    */
   plans: Plan[] = [];
 
-  /**
-   * @generated from field: repeated v1.User users = 5;
-   */
-  users: User[] = [];
-
   constructor(data?: PartialMessage<Config>) {
     super();
     proto3.util.initPartial(data, this);
@@ -53,7 +48,6 @@ export class Config extends Message<Config> {
     { no: 2, name: "host", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "repos", kind: "message", T: Repo, repeated: true },
     { no: 4, name: "plans", kind: "message", T: Plan, repeated: true },
-    { no: 5, name: "users", kind: "message", T: User, repeated: true },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Config {
@@ -380,6 +374,53 @@ export class PrunePolicy extends Message<PrunePolicy> {
 
   static equals(a: PrunePolicy | PlainMessage<PrunePolicy> | undefined, b: PrunePolicy | PlainMessage<PrunePolicy> | undefined): boolean {
     return proto3.util.equals(PrunePolicy, a, b);
+  }
+}
+
+/**
+ * @generated from message v1.AuthPolicy
+ */
+export class AuthPolicy extends Message<AuthPolicy> {
+  /**
+   * allow anonymous access.
+   *
+   * @generated from field: bool allow_anonymous = 1;
+   */
+  allowAnonymous = false;
+
+  /**
+   * list of users that can access this plan.
+   *
+   * @generated from field: repeated string users = 2;
+   */
+  users: string[] = [];
+
+  constructor(data?: PartialMessage<AuthPolicy>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "v1.AuthPolicy";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "allow_anonymous", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "users", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AuthPolicy {
+    return new AuthPolicy().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AuthPolicy {
+    return new AuthPolicy().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AuthPolicy {
+    return new AuthPolicy().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: AuthPolicy | PlainMessage<AuthPolicy> | undefined, b: AuthPolicy | PlainMessage<AuthPolicy> | undefined): boolean {
+    return proto3.util.equals(AuthPolicy, a, b);
   }
 }
 

@@ -63,7 +63,7 @@ EOM
 
 enable_launchd_plist() {
   echo "Enabling launchd plist com.backrest.plist"
-  launchctl unload /Library/LaunchAgents/com.backrest.plist || true
+  launchctl unload /Library/LaunchAgents/com.backrest.plist &> /dev/null || true
   launchctl load -w /Library/LaunchAgents/com.backrest.plist
 }
 
